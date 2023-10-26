@@ -1,54 +1,55 @@
 # Hilbert-Schmidt Independence Criterion (HSIC)
 
-Python version of the original MATLAB code of [Hilbert-Schmidt Independence Criterion](http://papers.nips.cc/paper/3201-a-kernel-statistical-test-of-independence.pdf) (HSIC).
+Pytorch version of [Hilbert-Schmidt Independence Criterion](http://papers.nips.cc/paper/3201-a-kernel-statistical-test-of-independence.pdf) (HSIC).
 
 ## Prerequisites
-* numpy
-* scipy
+* pytorch
 
-We tested the code using **Anaconda 4.3.0 64-bit for python 2.7** on windows.
+We tested the code using **torch 1.8.1 or torch 1.12.0 for python 3**.
 
 ## Apply on your data
 
 ### Usage
 
-Import HSIC using
+Import HSICLoss using
 
 ```
-from HSIC import hsic_gam
+from HSICLoss import HSICLoss
 ```
 
 Apply HSIC on your data
 ```
-testStat, thresh = hsic_gam(x, y, alph = 0.05)
+# define loss
+HISC_Loss = HISCLoss(alpha=0.05)
+
+# compute loss
+hisc_loss = HISC_Loss(x, y)
+#backward loss
+hisc_loss.backward()
+
 ```
 
 ### Description
+The input to definition for HISCLoss
+| Argument  | Description  |
+|---|---|
+|alph | level of the test |
 
-Input of function `hsic_gam()`
+
+Forward call require parameters x and y.
 
 | Argument  | Description  |
 |---|---|
 |x | Data of the first variable. `(n, dim_x)` numpy array.|
 |y | Data of the second variable. `(n, dim_y)` numpy array.|
-|alph | level of the test |
 
-Output of function `hsic_gam()`
 
-| Argument  | Description  |
-|---|---|
-|testStat  |test statistic|
-|thresh| test threshold for level alpha test|
-
-### Independence test result
-- If **testStat < thresh**, `x` and `y` are independent.
-- If **testStat > thresh**, `x` and `y` are not independent.
+Output of the HISC loss to backward.
 
 ## Authors
 
-* **Shoubo Hu** - shoubo [dot] sub [at] gmail [dot] com
+* **Xiao Li** - mxl1990 [at] gmail [dot] com
 
-See also the list of [contributors](https://github.com/amber0309/HSIC/contributors) who participated in this project.
 
 ## License
 
